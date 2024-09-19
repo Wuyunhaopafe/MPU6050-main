@@ -1,6 +1,6 @@
 #ifndef __INIT_H
 #define __INIT_H
 
-void pid_param_Init(void); //PID¿ØÖÆ²ÎÊý³õÊ¼»¯£¬¸ÄÐ´PID²¢²»»á±£´æÊý¾Ý£¬Çëµ÷ÊÔÍê³ÉºóÖ±½ÓÔÚ³ÌÐòÀï¸ü¸Ä ÔÙÉÕÂ¼µ½·É¿Ø
+void pid_param_Init(void); //PIDï¿½ï¿½ï¿½Æ²ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´PIDï¿½ï¿½ï¿½ï¿½ï¿½á±£ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éºï¿½Ö±ï¿½ï¿½ï¿½Ú³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½É¿ï¿½
 
 #endif

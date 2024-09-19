@@ -43,5 +43,4 @@ mpu6050\main.o: ../Core/Inc/gpio.h
 mpu6050\main.o: ../HARDWARE/mpu6050.h
 mpu6050\main.o: ../MATH/imu.h
 mpu6050\main.o: ../MATH/alldata.h
-mpu6050\main.o: ../HARDWARE/comm.h
 mpu6050\main.o: C:\Users\WuYunhao\Desktop\STM32\Environment\Keil 5\Core\ARM\ARMCC\Bin\..\include\stdio.h

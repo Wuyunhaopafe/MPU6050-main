@@ -5,12 +5,12 @@
 const float M_PI = 3.1415926535;
 const float RtA = 57.2957795f;
 const float AtR = 0.0174532925f;
-const float Gyro_G = 0.03051756f*2;	  	//ÍÓÂÝÒÇ³õÊ¼»¯Á¿³Ì+-2000¶ÈÃ¿ÃëÓÚ1 / (65536 / 4000) = 0.03051756*2		
-const float Gyro_Gr = 0.0005326f*2;     //Ãæ¼ÆËã¶ÈÃ¿Ãë,×ª»»»¡¶ÈÃ¿ÃëÔò 2*0.03051756	 * 0.0174533f = 0.0005326*2
+const float Gyro_G = 0.03051756f*2;	  	//ï¿½ï¿½ï¿½ï¿½ï¿½Ç³ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½+-2000ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½1 / (65536 / 4000) = 0.03051756*2		
+const float Gyro_Gr = 0.0005326f*2;     //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½,×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½ 2*0.03051756	 * 0.0174533f = 0.0005326*2
 
 static float NormAcc;
 
-/* ËÄÔªÊýÏµÊý */
+/* ï¿½ï¿½Ôªï¿½ï¿½Ïµï¿½ï¿½ */
 typedef volatile struct {
   float q0;
   float q1;
@@ -19,7 +19,7 @@ typedef volatile struct {
 } Quaternion;
 Quaternion NumQ = {1, 0, 0, 0};
 
-/* ÍÓÂÝÒÇ»ý·ÖÎó²î */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½Ç»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 struct V{
 	float x;
 	float y;
@@ -27,7 +27,7 @@ struct V{
 };	
 volatile struct V GyroIntegError = {0};
 
-/* ËÄÔªÊý½â·¨³õÊ¼»¯ */
+/* ï¿½ï¿½Ôªï¿½ï¿½ï¿½â·¨ï¿½ï¿½Ê¼ï¿½ï¿½ */
 void imu_rest(void)
 {
 	NumQ.q0 =1;
@@ -54,11 +54,11 @@ void GetAngle(const _st_Mpu *pMpu,_st_AngE *pAngE, float dt)
 	float NormQuat; 
 	float HalfTime = dt * 0.5f;
 
-	//ÌáÈ¡µÈÐ§Ðý×ª¾ØÕóÖÐµÄÖØÁ¦·ÖÁ¿ 
+	//ï¿½ï¿½È¡ï¿½ï¿½Ð§ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 	Gravity.x = 2*(NumQ.q1 * NumQ.q3 - NumQ.q0 * NumQ.q2);								
 	Gravity.y = 2*(NumQ.q0 * NumQ.q1 + NumQ.q2 * NumQ.q3);						  
 	Gravity.z = 1-2*(NumQ.q1 * NumQ.q1 + NumQ.q2 * NumQ.q2);	
-	// ¼ÓËÙ¶È¹éÒ»»¯
+	// ï¿½ï¿½ï¿½Ù¶È¹ï¿½Ò»ï¿½ï¿½
 	//printf("accX:%d\r\n",MPU6050.accX);
 	NormAcc = 1/sqrt(squa(MPU6050.accX)+ squa(MPU6050.accY) +squa(MPU6050.accZ));
 	//printf("NorAcc%f\r\n",NormAcc);
@@ -68,22 +68,22 @@ void GetAngle(const _st_Mpu *pMpu,_st_AngE *pAngE, float dt)
   Acc.y = pMpu->accY * NormAcc;
   Acc.z = pMpu->accZ * NormAcc;
 	
- 	//ÏòÁ¿²î³ËµÃ³öµÄÖµ
+ 	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ËµÃ³ï¿½ï¿½ï¿½Öµ
 	AccGravity.x = (Acc.y * Gravity.z - Acc.z * Gravity.y);
 	AccGravity.y = (Acc.z * Gravity.x - Acc.x * Gravity.z);
 	AccGravity.z = (Acc.x * Gravity.y - Acc.y * Gravity.x);
 	
-	//ÔÙ×ö¼ÓËÙ¶È»ý·Ö²¹³¥½ÇËÙ¶ÈµÄ²¹³¥Öµ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶È»ï¿½ï¿½Ö²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ÈµÄ²ï¿½ï¿½ï¿½Öµ
   GyroIntegError.x += AccGravity.x * KiDef;
   GyroIntegError.y += AccGravity.y * KiDef;
   GyroIntegError.z += AccGravity.z * KiDef;
 	
-	//½ÇËÙ¶ÈÈÚºÏ¼ÓËÙ¶È»ý·Ö²¹³¥Öµ
-  Gyro.x = pMpu->gyroX * Gyro_Gr + KpDef * AccGravity.x  +  GyroIntegError.x;//»¡¶ÈÖÆ
+	//ï¿½ï¿½ï¿½Ù¶ï¿½ï¿½ÚºÏ¼ï¿½ï¿½Ù¶È»ï¿½ï¿½Ö²ï¿½ï¿½ï¿½Öµ
+  Gyro.x = pMpu->gyroX * Gyro_Gr + KpDef * AccGravity.x  +  GyroIntegError.x;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
   Gyro.y = pMpu->gyroY * Gyro_Gr + KpDef * AccGravity.y  +  GyroIntegError.y;
   Gyro.z = pMpu->gyroZ * Gyro_Gr + KpDef * AccGravity.z  +  GyroIntegError.z;
 	
-	// Ò»½×Áú¸ñ¿âËþ·¨, ¸üÐÂËÄÔªÊý
+	// Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½
 	q0_t = (-NumQ.q1*Gyro.x - NumQ.q2*Gyro.y - NumQ.q3*Gyro.z) * HalfTime;
 	q1_t = ( NumQ.q0*Gyro.x - NumQ.q3*Gyro.y + NumQ.q2*Gyro.z) * HalfTime;
 	q2_t = ( NumQ.q3*Gyro.x + NumQ.q0*Gyro.y - NumQ.q1*Gyro.z) * HalfTime;
@@ -93,14 +93,14 @@ void GetAngle(const _st_Mpu *pMpu,_st_AngE *pAngE, float dt)
 	NumQ.q1 += q1_t;
 	NumQ.q2 += q2_t;
 	NumQ.q3 += q3_t;
-	// ËÄÔªÊý¹éÒ»»¯
+	// ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
 	NormQuat = 1/sqrt(squa(NumQ.q0) + squa(NumQ.q1) + squa(NumQ.q2) + squa(NumQ.q3));
 	NumQ.q0 *= NormQuat;
 	NumQ.q1 *= NormQuat;
 	NumQ.q2 *= NormQuat;
 	NumQ.q3 *= NormQuat;	
 	
-	// ËÄÔªÊý×ªÅ·À­½Ç
+	// ï¿½ï¿½Ôªï¿½ï¿½×ªÅ·ï¿½ï¿½ï¿½ï¿½
 	{
 		 
 			#ifdef	YAW_GYRO
@@ -108,16 +108,18 @@ void GetAngle(const _st_Mpu *pMpu,_st_AngE *pAngE, float dt)
 		float *)pAngE = atan2f(2 * NumQ.q1 *NumQ.q2 + 2 * NumQ.q0 * NumQ.q3, 1 - 2 * NumQ.q2 *NumQ.q2 - 2 * NumQ.q3 * NumQ.q3) * RtA;  //yaw
 			#else
 				float yaw_G = pMpu->gyroZ * Gyro_G;
-				if((yaw_G > 1.0f) || (yaw_G < -1.0f)) //Êý¾ÝÌ«Ð¡¿ÉÒÔÈÏÎªÊÇ¸ÉÈÅ£¬²»ÊÇÆ«º½¶¯×÷
+				if((yaw_G > 1.0f) || (yaw_G < -1.0f)) //ï¿½ï¿½ï¿½ï¿½Ì«Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Ç¸ï¿½ï¿½Å£ï¿½ï¿½ï¿½ï¿½ï¿½Æ«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				{
 					pAngE->yaw  += yaw_G * dt;
-					printf("Yaw:%f\r\n",pAngE->yaw);
+					//printf("Yaw:%f; ",pAngE->yaw);
 				}
 			#endif
 			pAngE->pitch  =  asin(2 * NumQ.q0 *NumQ.q2 - 2 * NumQ.q1 * NumQ.q3) * RtA;						
 		
 			pAngE->roll	= atan2(2 * NumQ.q2 *NumQ.q3 + 2 * NumQ.q0 * NumQ.q1, 1 - 2 * NumQ.q1 *NumQ.q1 - 2 * NumQ.q2 * NumQ.q2) * RtA;	//PITCH 			
-			printf("Pitch:%f;\r\n",pAngE->pitch);
-			printf("Roll:%f;\r\n",pAngE->roll);
+			//printf("Pitch:%f; ",pAngE->pitch);
+			//printf("Roll:%f;\n",pAngE->roll);
+				printf("data:%f,%f,%f\n",pAngE->yaw,pAngE->pitch,pAngE->roll);
+			
 	}
 }

@@ -53,8 +53,8 @@
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
-          <DebugInformation>1</DebugInformation>
-          <BrowseInformation>1</BrowseInformation>
+          <DebugInformation>0</DebugInformation>
+          <BrowseInformation>0</BrowseInformation>
           <ListingPath></ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
@@ -190,7 +190,7 @@
             <hadIRAM2>1</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
-            <useUlib>0</useUlib>
+            <useUlib>1</useUlib>
             <EndSel>0</EndSel>
             <uLtcg>0</uLtcg>
             <nSecure>0</nSecure>
@@ -555,11 +555,6 @@
           <GroupName>HardWare</GroupName>
           <Files>
             <File>
-              <FileName>comm.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\HARDWARE\comm.c</FilePath>
-            </File>
-            <File>
               <FileName>init.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\init.c</FilePath>
@@ -583,11 +578,6 @@
               <FileName>kalman.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\MATH\kalman.c</FilePath>
-            </File>
-            <File>
-              <FileName>pid.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\MATH\pid.c</FilePath>
             </File>
           </Files>
         </Group>

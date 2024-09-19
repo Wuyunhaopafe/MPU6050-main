@@ -27,7 +27,6 @@
 /* USER CODE BEGIN Includes */
 #include "mpu6050.h"
 #include "imu.h"
-#include "comm.h"
 #include <stdio.h>
 /* USER CODE END Includes */
 

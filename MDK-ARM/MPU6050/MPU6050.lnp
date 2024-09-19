@@ -29,13 +29,11 @@
 "mpu6050\stm32h7xx_hal_uart.o"
 "mpu6050\stm32h7xx_hal_uart_ex.o"
 "mpu6050\system_stm32h7xx.o"
-"mpu6050\comm.o"
 "mpu6050\init.o"
 "mpu6050\mpu6050.o"
 "mpu6050\imu.o"
 "mpu6050\kalman.o"
-"mpu6050\pid.o"
---strict --scatter "MPU6050\MPU6050.sct"
+--library_type=microlib --nodebug --strict --scatter "MPU6050\MPU6050.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list "MPU6050.map" -o MPU6050\MPU6050.axf

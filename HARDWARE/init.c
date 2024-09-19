@@ -1,117 +1,12 @@
 #include "init.h"
 #include "alldata.h"
 
-volatile uint32_t SysTick_count; //ÏµÍ³Ê±¼ä¼ÆÊı
-_st_Mpu MPU6050;   //MPU6050Ô­Ê¼Êı¾İ
-_st_AngE Angle;    //µ±Ç°½Ç¶È×ËÌ¬Öµ
-_st_Remote Remote; //Ò£¿ØÍ¨µÀÖµ
+volatile uint32_t SysTick_count; //ç³»ç»Ÿæ—¶é—´è®¡æ•°
+_st_Mpu MPU6050;   //MPU6050åŸå§‹æ•°æ®
+_st_AngE Angle;    //å½“å‰è§’åº¦å§¿æ€å€¼
+_st_Remote Remote; //é¥æ§é€šé“å€¼
 
-_st_ALL_flag ALL_flag; //ÏµÍ³±êÖ¾Î»£¬°üº¬½âËø±êÖ¾Î»µÈ
-
-PidObject pidRateX; //ÄÚ»·PIDÊı¾İ
-PidObject pidRateY;
-PidObject pidRateZ;
-
-PidObject pidPitch; //Íâ»·PIDÊı¾İ
-PidObject pidRoll;
-PidObject pidYaw;
-
-//void pid_param_Init(void); //PID¿ØÖÆ²ÎÊı³õÊ¼»¯£¬¸ÄĞ´PID²¢²»»á±£´æÊı¾İ£¬Çëµ÷ÊÔÍê³ÉºóÖ±½ÓÔÚ³ÌĞòÀï¸ü¸Ä ÔÙÉÕÂ¼µ½·É¿Ø
-
-int16_t motor_PWM_Value[4];//
-
-void ALL_Init(void)
-{
-//	USB_HID_Init();   		//USBÉÏÎ»»ú³õÊ¼»¯
-//	
-//	IIC_Init();             //I2C³õÊ¼»¯
-//	
-//	pid_param_Init();       //PID²ÎÊı³õÊ¼»¯
-//	
-//	
-//	MpuInit();              //MPU6050³õÊ¼»¯
-////----------------------------------------	
-//// Ë®Æ½¾²Ö¹±ê¶¨£¬¸Ã¹¦ÄÜÖ»ĞèÒª½øĞĞÒ»´Î£¬²»ÒªÃ¿´Î½øĞĞ¡£µê¼Ò·¢»õÇ°ÒÑ¾­½øĞĞÒ»´Î±ê¶¨ÁË£¬±ê¶¨Íêºó»á×Ô¶¯±£´æµ½MCUµÄFLASHÖĞ¡£
-//// ÈçĞèĞ£×¼£¬ÖØĞÂ´ò¿ª¼´¿É£¬ÑÓÊ±5SÊÇÎªÁË²åÉÏµç³ØºóÓĞ³ä×ãµÄÊ±¼ä½«·ÉĞĞÆ÷·ÅÔÚµØÉÏ½øĞĞË®Æ½¾²Ö¹±ê¶¨¡£
-////	delay_ms(5000);MpuGetOffset();
-////----------------------------------------		
-////	USART1_Config();  //±¸ÓÃ´®¿Ú     
-
-//	
-//	NRF24L01_init();				//2.4GÒ£¿ØÍ¨ĞÅ³õÊ¼»¯
-//	
-//	TIM2_PWM_Config();			//4Â·PWM³õÊ¼»¯
-//	TIM3_PWM_Config();      //LED PWM³õÊ¼»¯
-//	
-//	
-//	
-//	TIM1_Config();					//ÏµÍ³¹¤×÷ÖÜÆÚ³õÊ¼»¯ 
-	
-}
+_st_ALL_flag ALL_flag; //ç³»ç»Ÿæ ‡å¿—ä½ï¼ŒåŒ…å«è§£é”æ ‡å¿—ä½ç­‰
 
 
-////PIDÔÚ´Ë´¦ĞŞ¸Ä
-//void pid_param_Init(void)//PID²ÎÊı³õÊ¼»¯
-//{
-//	pidRateX.kp = 4.0f;
-//	pidRateY.kp = 4.0f;
-//	pidRateZ.kp = 8.0f;
-//	
-//	pidRateX.ki = 0.02f;
-//	pidRateY.ki = 0.02f;
-//	pidRateZ.ki = 0.0f;	
-//	
-//	pidRateX.kd = 0.28f;
-//	pidRateY.kd = 0.28f;
-//	pidRateZ.kd = 0.4f;	
-//	
-//	pidPitch.kp = 6.0f;
-//	pidRoll.kp = 6.0f;
-//	pidYaw.kp = 6.0f;	
 
-
-//}
-
-
-////PIDÔÚ´Ë´¦ĞŞ¸Ä
-//void pid_param_Init(void)//PID²ÎÊı³õÊ¼»¯
-//{
-//	pidRateX.kp = 3.f;
-//	pidRateY.kp = 3.f;
-//	pidRateZ.kp = 6.0f;
-//	
-//	pidRateX.ki = 0.05f;
-//	pidRateY.ki = 0.05f;
-//	pidRateZ.ki = 0.02f;	
-//	
-//	pidRateX.kd = 0.3f;
-//	pidRateY.kd = 0.3f;
-//	pidRateZ.kd = 0.3f;	
-//	
-//	pidPitch.kp = 10.0f;
-//	pidRoll.kp = 10.0f;
-//	pidYaw.kp = 8.0f;	
-
-
-//}
-//PIDÔÚ´Ë´¦ĞŞ¸Ä
-void pid_param_Init(void)//PID²ÎÊı³õÊ¼»¯
-{
-	pidRateX.kp = 3.f;
-	pidRateY.kp = 3.f;
-	pidRateZ.kp = 8.0f;
-	
-	pidRateX.kd = 0.20f;
-	pidRateY.kd = 0.20f;
-	pidRateZ.kd = 0.4f;	
-	
-	pidPitch.kp = 8.0f;
-	pidRoll.kp = 8.0f;
-	pidYaw.kp = 6.0f;	
-	
-	
-//	pidPitch.ki = 0.01f;
-//	pidRoll.ki = 0.01f;
-
-
-}
