@@ -42,23 +42,6 @@ typedef struct
 	uint16_t AUX4;	
 }_st_Remote;
 
-typedef volatile struct
-{
-	float desired;     			//< set point
-	float offset;      			//< offset
-	float prevError;    		//< previous error
-	float integ;        		//< integral
-	float kp;           		//< proportional gain
-	float ki;           		//< integral gain
-	float kd;           		//< derivative gain
-	float IntegLimitHigh;   //< integral limit
-	float IntegLimitLow;
-	float measured;
-	float out;
-	float OutLimitHigh;
-	float OutLimitLow;
-}PidObject;
-
 
 typedef volatile struct
 {
@@ -73,15 +56,6 @@ extern _st_AngE Angle;
 
 extern _st_ALL_flag ALL_flag;
 
-extern	PidObject pidRateX;
-extern	PidObject pidRateY;
-extern	PidObject pidRateZ;
-
-extern	PidObject pidPitch;
-extern	PidObject pidRoll;
-extern	PidObject pidYaw;
-
-extern int16_t motor_PWM_Value[4];
 
 #endif
 

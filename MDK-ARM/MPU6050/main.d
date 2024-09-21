@@ -36,6 +36,7 @@ mpu6050\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim.h
 mpu6050\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h
 mpu6050\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h
 mpu6050\main.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h
+mpu6050\main.o: ../Core/Inc/dma.h
 mpu6050\main.o: ../Core/Inc/i2c.h
 mpu6050\main.o: ../Core/Inc/tim.h
 mpu6050\main.o: ../Core/Inc/usart.h
@@ -44,3 +45,4 @@ mpu6050\main.o: ../HARDWARE/mpu6050.h
 mpu6050\main.o: ../MATH/imu.h
 mpu6050\main.o: ../MATH/alldata.h
 mpu6050\main.o: C:\Users\WuYunhao\Desktop\STM32\Environment\Keil 5\Core\ARM\ARMCC\Bin\..\include\stdio.h
+mpu6050\main.o: C:\Users\WuYunhao\Desktop\STM32\Environment\Keil 5\Core\ARM\ARMCC\Bin\..\include\string.h

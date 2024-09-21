@@ -1,6 +1,6 @@
 #include "kalman.h"
 
-//Ò»Î¬¿¨¶ûÂüÂË²¨
+//ä¸€ç»´å¡å°”æ›¼æ»¤æ³¢
 void kalmanfiter(struct KalmanFilter *EKF,float input)
 {
 	EKF->NewP = EKF->LastP + EKF->Q;

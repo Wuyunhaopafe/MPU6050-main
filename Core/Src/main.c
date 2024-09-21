@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "dma.h"
 #include "i2c.h"
 #include "tim.h"
 #include "usart.h"
@@ -28,6 +29,7 @@
 #include "mpu6050.h"
 #include "imu.h"
 #include <stdio.h>
+#include <string.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -37,6 +39,8 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+
+#define BUFF_SIZE 100
 
 /* USER CODE END PD */
 
@@ -48,6 +52,8 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+extern DMA_HandleTypeDef hdma_usart1_rx;
+uint8_t rx_buff[BUFF_SIZE];
 
 /* USER CODE END PV */
 
@@ -100,12 +106,19 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_I2C1_Init();
+  MX_DMA_Init();
   MX_TIM2_Init();
+  MX_I2C1_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
 	MPU_Init();
 	HAL_TIM_Base_Start_IT(&htim2);
+	
+	/* 使用前先调用一次空闲中断 */
+	HAL_UARTEx_ReceiveToIdle_DMA(&huart1, rx_buff, BUFF_SIZE);
+  __HAL_DMA_DISABLE_IT(&hdma_usart1_rx, DMA_IT_HT);		   // 手动关闭DMA_IT_HT中断	
+	
+	
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -217,6 +230,36 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   /* USER CODE BEGIN Callback 1 */
 
   /* USER CODE END Callback 1 */
+}
+
+
+void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef * huart, uint16_t Size)
+{
+    if(huart->Instance == USART1)
+    {
+        if (Size <= BUFF_SIZE)
+        {
+            HAL_UARTEx_ReceiveToIdle_DMA(&huart1, rx_buff, BUFF_SIZE); // 接收完毕后重启
+            //HAL_UART_Transmit(&huart1, rx_buff, Size, 0xffff);         // 将接收到的数据再发出
+            __HAL_DMA_DISABLE_IT(&hdma_usart1_rx, DMA_IT_HT);		   // 手动关闭DMA_IT_HT中断
+            memset(rx_buff, 0, BUFF_SIZE);							   // 清除接收缓存
+        }
+        else  // 接收数据长度大于BUFF_SIZE，错误处理
+        {
+            
+        }
+    }
+}
+
+void HAL_UART_ErrorCallback(UART_HandleTypeDef * huart)
+{
+    if(huart->Instance == USART1)
+    {
+		HAL_UARTEx_ReceiveToIdle_DMA(&huart1, rx_buff, BUFF_SIZE); // 接收发生错误后重启
+		__HAL_DMA_DISABLE_IT(&hdma_usart1_rx, DMA_IT_HT);		   // 手动关闭DMA_IT_HT中断
+		memset(rx_buff, 0, BUFF_SIZE);							   // 清除接收缓存
+        
+    }
 }
 
 /**

@@ -1266,14 +1266,14 @@ ARM Macro Assembler    Page 20
   610 0000001C                 END
               00000000 
               00000000 
-Command Line: --xref --diag_suppress=9931 --cpu=Cortex-M7.fp.dp --apcs=interwor
-k --depend=mpu6050\startup_stm32h753xx.d -ompu6050\startup_stm32h753xx.o -I.\RT
-E\_MPU6050 -I"C:\Users\WuYunhao\Desktop\STM32\Environment\Keil 5\Packs\ARM\CMSI
-S\5.9.0\CMSIS\Core\Include" -I"C:\Users\WuYunhao\Desktop\STM32\Environment\Keil
- 5\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include" --
-predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 539" --predef
-ine="_RTE_ SETA 1" --predefine="STM32H753xx SETA 1" --predefine="_RTE_ SETA 1" 
---list=startup_stm32h753xx.lst startup_stm32h753xx.s
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M7.fp.dp --apcs=
+interwork --depend=mpu6050\startup_stm32h753xx.d -ompu6050\startup_stm32h753xx.
+o -I.\RTE\_MPU6050 -I"C:\Users\WuYunhao\Desktop\STM32\Environment\Keil 5\Packs\
+ARM\CMSIS\5.9.0\CMSIS\Core\Include" -I"C:\Users\WuYunhao\Desktop\STM32\Environm
+ent\Keil 5\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Inc
+lude" --predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 539" 
+--predefine="_RTE_ SETA 1" --predefine="STM32H753xx SETA 1" --predefine="_RTE_ 
+SETA 1" --list=startup_stm32h753xx.lst startup_stm32h753xx.s
 
 
 

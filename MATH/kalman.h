@@ -1,16 +1,16 @@
 #ifndef __KALMAN_H
 #define __KALMAN_H
 
-//¿¨¶ûÂüÂË²¨²ÎÊı½á¹¹Ìå
+//å¡å°”æ›¼æ»¤æ³¢å‚æ•°ç»“æ„ä½“
 struct KalmanFilter{
-	float LastP;		//ÉÏÒ»´ÎĞ­·½²î
-	float NewP;		//×îĞÂµÄĞ­·½²î
-	float Out;			//¿¨¶ûÂüÊä³ö
-	float Kg;				//¿¨¶ûÂüÔöÒæ
-	float Q;				//¹ı³ÌÔëÉùµÄĞ­·½²î
-	float R;				//¹Û²âÔëÉùµÄĞ­·½²î
+	float LastP;		//ä¸Šä¸€æ¬¡åæ–¹å·®
+	float NewP;		//æœ€æ–°çš„åæ–¹å·®
+	float Out;			//å¡å°”æ›¼è¾“å‡º
+	float Kg;				//å¡å°”æ›¼å¢ç›Š
+	float Q;				//è¿‡ç¨‹å™ªå£°çš„åæ–¹å·®
+	float R;				//è§‚æµ‹å™ªå£°çš„åæ–¹å·®
 };
 
-extern void kalmanfiter(struct KalmanFilter *EKF,float input);		//Ò»Î¬¿¨¶ûÂüÂË²¨
+extern void kalmanfiter(struct KalmanFilter *EKF,float input);		//ä¸€ç»´å¡å°”æ›¼æ»¤æ³¢
 
 #endif

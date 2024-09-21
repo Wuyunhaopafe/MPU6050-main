@@ -22,16 +22,30 @@ Dialog DLL:      TCM.DLL V1.56.4.0
  
 <h2>Project:</h2>
 C:\Users\WuYunhao\Desktop\HERO\MPU6050-main\MDK-ARM\MPU6050.uvprojx
-Project File Date:  09/19/2024
+Project File Date:  09/21/2024
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 5 (build 528)', folder: 'C:\Users\WuYunhao\Desktop\STM32\Environment\Keil 5\Core\ARM\ARMCC\Bin'
 Build target 'MPU6050'
+compiling init.c...
+compiling kalman.c...
+..\MATH\kalman.c(10): warning:  #1-D: last line of file ends without a newline
+  }
+..\MATH\kalman.c: 1 warning, 0 errors
+compiling imu.c...
+..\MATH\imu.c(114): warning:  #223-D: function "printf" declared implicitly
+  					printf("Yaw:%f\r\n",pAngE->yaw);
+..\MATH\imu.c(120): warning:  #223-D: function "printf" declared implicitly
+  			printf("Pitch:%f;\r\n",pAngE->pitch);
+..\MATH\imu.c(123): warning:  #1-D: last line of file ends without a newline
+  }
+..\MATH\imu.c: 3 warnings, 0 errors
+compiling mpu6050.c...
 compiling main.c...
 linking...
-Program Size: Code=21758 RO-data=994 RW-data=132 ZI-data=1468  
+Program Size: Code=29974 RO-data=1002 RW-data=132 ZI-data=1692  
 FromELF: creating hex file...
-"MPU6050\MPU6050.axf" - 0 Error(s), 0 Warning(s).
+"MPU6050\MPU6050.axf" - 0 Error(s), 4 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -55,7 +69,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE@5.6.0
       Include file:  CMSIS/Core/Include/tz_context.h
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:04
 </pre>
 </body>
 </html>
